@@ -17,9 +17,10 @@ namespace ConsoleApp13
         {
             string domain = System.Net.NetworkInformation.IPGlobalProperties.GetIPGlobalProperties().DomainName; // Получение домена(если его нет, то выдает пустое значение)
             ManagementObjectSearcher mos = new ManagementObjectSearcher(@"root\CIMV2", @"SELECT * FROM Win32_ComputerSystem");
-            
-            if (domain == null)
+
+            if (!String.IsNullOrWhiteSpace(domain))
             {
+
                 Console.WriteLine("DomainName: {0}", domain);
             }
             else
@@ -28,9 +29,10 @@ namespace ConsoleApp13
                 {
                     Console.WriteLine("Workgroup: " + wg["Workgroup"]);
                 }
+                
             }
             Console.WriteLine("UserName: {0}", Environment.UserName); // Получение имени
-
+            Console.WriteLine("Версия ОС: {0}", Environment.OSVersion);
             Console.ReadKey();
 
         }
